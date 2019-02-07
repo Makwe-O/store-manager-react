@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.scss';
+import Routes from './routes';
 
 const App = () => {
-  return <div>Store Manager</div>;
+  return <>{Routes}</>;
 };
 
 export default App;

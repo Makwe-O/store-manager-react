@@ -29,5 +29,8 @@ module.exports = {
       template: './src/index.html'
     })
   ],
-  resolve: { extensions: ['.js', '.jsx'] }
+  resolve: { extensions: ['.js', '.jsx'] },
+  devServer: {
+    historyApiFallback: true
+  }
 };
