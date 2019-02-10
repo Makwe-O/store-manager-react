@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LandingPage from '../components/view/LandingPage/LandingPage';
-import NotFound from '../components/view/NotFound/NotFound';
+import LandingPage from '../components/views/LandingPage/LandingPage';
+import NotFound from '../components/views/NotFound/NotFound';
 
 export default (
   <BrowserRouter>
