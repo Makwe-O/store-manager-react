@@ -8,8 +8,6 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 export const loginLocal = ({ email, password }, history) => async dispatch => {
   try {
-    console.log('i was her');
-
     const res = await makeRequest('/auth/login', {
       method: 'POST',
       body: {
@@ -19,7 +17,7 @@ export const loginLocal = ({ email, password }, history) => async dispatch => {
     });
 
     const { token, message } = res;
-    const role = decodeJwt(token).roleId;
+    const role = decodeJwt(token).role;
     localStorage.setItem('userToken', token);
 
     dispatch({
@@ -28,7 +26,7 @@ export const loginLocal = ({ email, password }, history) => async dispatch => {
     });
 
     setTimeout(() => {
-      role === 'Admin' ? history.push('/attendant') : history.push('./f');
+      role === 'Admin' ? history.push('/admin') : history.push('./attendant');
     }, 3000);
   } catch (error) {
     const {

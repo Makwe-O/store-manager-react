@@ -45,7 +45,6 @@ class LoginForm extends Component {
   render() {
     const { message } = this.props;
     const { isLoading } = this.state;
-    console.log(this.props);
 
     return (
       <>
