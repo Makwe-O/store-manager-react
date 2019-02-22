@@ -3,18 +3,16 @@ import { connect } from 'react-redux';
 import {
   Button,
   Header,
-  Image,
   Menu,
   Segment,
   Sidebar,
   Container,
-  Dimmer,
-  Loader,
   Grid
 } from 'semantic-ui-react';
-import SidebarNav from '../SIdebarNav/SidebarNav';
+import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import VerticalCard from '../VerticalCard/VerticalCard';
+import VerticalCardLoader from '../VerticalCard/VerticalCardLoader';
 
 class AttendantDashBoard extends Component {
   state = { visible: false };
@@ -59,15 +57,34 @@ class AttendantDashBoard extends Component {
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
                   {products.length === 0 ? (
-                    <Segment style={{ height: '50vh' }}>
-                      <Dimmer active inverted>
-                        <Loader size="massive">
-                          Getting things Ready <span role="img">👍</span>
-                        </Loader>
-                      </Dimmer>
-
-                      <Image src="/images/wireframe/paragraph.png" />
-                    </Segment>
+                    <>
+                      <Grid>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                        <Grid.Column mobile={16} tablet={8} computer={4}>
+                          <VerticalCardLoader />
+                        </Grid.Column>
+                      </Grid>
+                    </>
                   ) : (
                     <Grid>
                       {products.map(product => (
