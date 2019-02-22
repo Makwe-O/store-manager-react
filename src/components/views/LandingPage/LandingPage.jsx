@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Header, Button, Icon, Step } from 'semantic-ui-react';
+import { Container, Header, Icon, Step } from 'semantic-ui-react';
 import Login from '../Login/login';
 import './LandingPage.scss';
+import ProductList from '../../containers/ProductList/ProductList';
 
 const LandingPage = () => {
   return (
