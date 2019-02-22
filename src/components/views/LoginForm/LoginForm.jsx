@@ -17,7 +17,6 @@ class LoginForm extends Component {
 
   onEmailChange = e => {
     const email = e.target.value;
-
     this.setState({
       email
     });
