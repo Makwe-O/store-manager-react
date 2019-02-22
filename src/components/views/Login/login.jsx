@@ -1,5 +1,7 @@
 import React from 'react';
-import { Header, Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
+import LoginForm from '../LoginForm/LoginForm';
+
 const Login = props => {
   const { size } = props;
   return (
@@ -13,19 +15,7 @@ const Login = props => {
       <Modal.Header>Sign In To Store Manager</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <Form>
-            <Form.Field>
-              <label>Email</label>
-              <input type="email" placeholder="Email" />
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input placeholder="Password" />
-            </Form.Field>
-            <Button type="submit" color="blue">
-              Submit
-            </Button>
-          </Form>
+          <LoginForm />
         </Modal.Description>
       </Modal.Content>
     </Modal>
