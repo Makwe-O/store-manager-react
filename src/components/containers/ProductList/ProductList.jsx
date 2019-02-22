@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Divider, Header } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 import VerticalCard from '../../views/VerticalCard/VerticalCard';
 
 const ProductList = () => (

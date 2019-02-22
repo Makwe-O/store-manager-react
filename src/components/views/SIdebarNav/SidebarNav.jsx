@@ -1,29 +1,84 @@
 import React from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import './SidebarNav.scss';
 
-const SidebarNav = () => {
+const SidebarNav = ({ navOption }) => {
   return (
     <>
-      <Menu.Item as="a">
-        <Icon name="home" />
-        Products
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="gamepad" />
-        Add Product
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="camera" />
-        Add Attendant
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="camera" />
-        Sales Record
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="camera" />
-        Logout
-      </Menu.Item>
+      {navOption === 'Admin' ? (
+        <>
+          <NavLink activeClassName="is-active" to="/admin" exact>
+            <Menu.Item as="div">
+              <Icon name="gem" />
+              Products
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/1" exact>
+            <Menu.Item as="div">
+              <Icon name="database" />
+              Sales Record
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/2" exact>
+            <Menu.Item as="div">
+              <Icon name="users" />
+              Sale Attendants
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/3" exact>
+            <Menu.Item as="div">
+              <Icon name="file outline" />
+              Categories
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink
+            className="navstyle"
+            activeClassName="is-active"
+            to="/"
+            exact
+          >
+            <Menu.Item as="div">
+              <Icon name="cogs" />
+              Logout
+            </Menu.Item>
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink activeClassName="is-active" to="/attendant" exact>
+            <Menu.Item as="div">
+              <Icon name="gem" />
+              Products
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/1" exact>
+            <Menu.Item as="div">
+              <Icon name="database" />
+              Sales Record
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/2" exact>
+            <Menu.Item as="div">
+              <Icon name="users" />
+              Profile
+            </Menu.Item>
+          </NavLink>
+
+          <NavLink activeClassName="is-active" to="/" exact>
+            <Menu.Item as="div">
+              <Icon name="users" />
+              Logout
+            </Menu.Item>
+          </NavLink>
+        </>
+      )}
     </>
   );
 };

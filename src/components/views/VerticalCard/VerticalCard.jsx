@@ -1,21 +1,35 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Label, Image, Button, Icon } from 'semantic-ui-react';
+import './VerticalCard.scss';
 
-const VerticalCard = ({ image, productName, description }) => {
+const VerticalCard = ({ name, image, price, quantity, category }) => {
   return (
     <>
       <Card>
-        <Image src={image} />
+        <Image src={image} className="vertical-card-image" />
         <Card.Content>
-          <Card.Header>{productName}</Card.Header>
-          <Card.Description>{description}</Card.Description>
+          <Card.Header>{name}</Card.Header>
+          <Card.Description>
+            Price:{' '}
+            <Label as="a" tag>
+              ${price}
+            </Label>
+          </Card.Description>
+          <Card.Description>
+            Cartogory:{' '}
+            <Label as="a" tag>
+              {category}
+            </Label>
+          </Card.Description>
+          <Card.Content extra>Quantity:{quantity}</Card.Content>
         </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name="user" />
-            22 Friends
-          </a>
-        </Card.Content>
+
+        <Button animated color="blue">
+          <Button.Content visible>Add To Cart</Button.Content>
+          <Button.Content hidden>
+            <Icon name="arrow right" />
+          </Button.Content>
+        </Button>
       </Card>
     </>
   );
