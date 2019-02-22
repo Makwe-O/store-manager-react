@@ -29,7 +29,7 @@ const SidebarNav = ({ navOption }) => {
             </Menu.Item>
           </NavLink>
 
-          <NavLink activeClassName="is-active" to="/3" exact>
+          <NavLink activeClassName="is-active" to="/categories" exact>
             <Menu.Item as="div">
               <Icon name="file outline" />
               Categories

@@ -9,7 +9,6 @@ export const getProducts = () => {
       const res = await makeRequest(`/products`, {
         method: 'GET'
       });
-
       dispatch({
         type: GET_PRODUCTS_SUCCESS,
         payload: res.products
