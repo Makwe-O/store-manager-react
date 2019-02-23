@@ -15,7 +15,7 @@ const SidebarNav = ({ navOption }) => {
             </Menu.Item>
           </NavLink>
 
-          <NavLink activeClassName="is-active" to="/1" exact>
+          <NavLink activeClassName="is-active" to="/sales" exact>
             <Menu.Item as="div">
               <Icon name="database" />
               Sales Record
