@@ -17,13 +17,7 @@ import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 
 class AdminDashBoard extends Component {
-  state = { visible: false };
-
-  handleHideClick = () => this.setState({ visible: false });
-
-  handleShowClick = () => this.setState({ visible: true });
-
-  handleSidebarHide = () => this.setState({ visible: false });
+  state = { visible: false, open: false };
 
   async componentWillMount() {
     this.checkRoleAdmin();
@@ -33,6 +27,12 @@ class AdminDashBoard extends Component {
     const { getProducts } = this.props;
     getProducts();
   }
+
+  handleHideClick = () => this.setState({ visible: false });
+
+  handleShowClick = () => this.setState({ visible: true });
+
+  handleSidebarHide = () => this.setState({ visible: false });
 
   checkRoleAdmin() {
     const { role, history } = this.props;
@@ -45,9 +45,9 @@ class AdminDashBoard extends Component {
   }
 
   render() {
-    const { role } = this.props;
-    const { products } = this.props;
+    const { products, role, deleteProducts } = this.props;
     const { visible } = this.state;
+
     return (
       <>
         <div className="full-height">
@@ -73,7 +73,10 @@ class AdminDashBoard extends Component {
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
                   {products.length === 0 ? (
-                    <Segment style={{ height: '50vh' }}>
+                    <Segment
+                      className="segment-style"
+                      style={{ height: '50vh' }}
+                    >
                       <Dimmer active inverted>
                         <Loader size="massive">Getting things Ready 👍</Loader>
                       </Dimmer>
@@ -118,7 +121,13 @@ class AdminDashBoard extends Component {
                                   <Button.Content visible>
                                     Delete
                                   </Button.Content>
-                                  <Button.Content hidden>
+
+                                  <Button.Content
+                                    hidden
+                                    onClick={() =>
+                                      deleteProducts(product.product_id)
+                                    }
+                                  >
                                     <Icon name="trash alternate outline left " />
                                   </Button.Content>
                                 </Button>
@@ -151,7 +160,8 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = {
-  getProducts: productsActions.getProducts
+  getProducts: productsActions.getProducts,
+  deleteProducts: productsActions.deleteProducts
 };
 export default connect(
   mapStateToProps,
