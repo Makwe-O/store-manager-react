@@ -9,7 +9,6 @@ export const getSalesRecords = () => {
       const res = await makeRequest(`/sales`, {
         method: 'GET'
       });
-      console.log();
       dispatch({
         type: GET_SALES_SUCCESS,
         payload: res.sales_record

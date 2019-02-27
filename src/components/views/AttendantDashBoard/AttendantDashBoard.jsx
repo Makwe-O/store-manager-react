@@ -30,7 +30,6 @@ class AttendantDashBoard extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(products);
     const { visible } = this.state;
     return (
       <>
@@ -86,25 +85,25 @@ class AttendantDashBoard extends Component {
                       </Grid>
                     </>
                   ) : (
-                    <Grid>
-                      {products.map(product => (
-                        <Grid.Column
-                          mobile={16}
-                          tablet={8}
-                          computer={4}
-                          key={product.product_id}
-                        >
-                          <VerticalCard
-                            name={product.product_name}
-                            image={product.product_image}
-                            price={product.price}
-                            quantity={product.quantity}
-                            category={product.category_name}
-                          />
-                        </Grid.Column>
-                      ))}
-                    </Grid>
-                  )}
+                      <Grid>
+                        {products.map(product => (
+                          <Grid.Column
+                            mobile={16}
+                            tablet={8}
+                            computer={4}
+                            key={product.product_id}
+                          >
+                            <VerticalCard
+                              name={product.product_name}
+                              image={product.product_image}
+                              price={product.price}
+                              quantity={product.quantity}
+                              category={product.category_name}
+                            />
+                          </Grid.Column>
+                        ))}
+                      </Grid>
+                    )}
                 </Segment>
               </Sidebar.Pusher>
             </Container>

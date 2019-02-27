@@ -9,7 +9,6 @@ export const getCategories = () => {
       const res = await makeRequest(`/categories`, {
         method: 'GET'
       });
-      console.log();
       dispatch({
         type: GET_CATEGORIES_SUCCESS,
         payload: res.categories

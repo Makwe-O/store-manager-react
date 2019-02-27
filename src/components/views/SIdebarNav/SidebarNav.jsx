@@ -15,6 +15,13 @@ const SidebarNav = ({ navOption }) => {
             </Menu.Item>
           </NavLink>
 
+          <NavLink activeClassName="is-active" to="/addProduct" exact>
+            <Menu.Item as="div">
+              <Icon name="gem" />
+              Add Products
+            </Menu.Item>
+          </NavLink>
+
           <NavLink activeClassName="is-active" to="/sales" exact>
             <Menu.Item as="div">
               <Icon name="database" />
@@ -49,36 +56,36 @@ const SidebarNav = ({ navOption }) => {
           </NavLink>
         </>
       ) : (
-        <>
-          <NavLink activeClassName="is-active" to="/attendant" exact>
-            <Menu.Item as="div">
-              <Icon name="gem" />
-              Products
+          <>
+            <NavLink activeClassName="is-active" to="/attendant" exact>
+              <Menu.Item as="div">
+                <Icon name="gem" />
+                Products
             </Menu.Item>
-          </NavLink>
+            </NavLink>
 
-          <NavLink activeClassName="is-active" to="/1" exact>
-            <Menu.Item as="div">
-              <Icon name="database" />
-              Sales Record
+            <NavLink activeClassName="is-active" to="/1" exact>
+              <Menu.Item as="div">
+                <Icon name="database" />
+                Sales Record
             </Menu.Item>
-          </NavLink>
+            </NavLink>
 
-          <NavLink activeClassName="is-active" to="/2" exact>
-            <Menu.Item as="div">
-              <Icon name="users" />
-              Profile
+            <NavLink activeClassName="is-active" to="/2" exact>
+              <Menu.Item as="div">
+                <Icon name="users" />
+                Profile
             </Menu.Item>
-          </NavLink>
+            </NavLink>
 
-          <NavLink activeClassName="is-active" to="/" exact>
-            <Menu.Item as="div">
-              <Icon name="users" />
-              Logout
+            <NavLink activeClassName="is-active" to="/" exact>
+              <Menu.Item as="div">
+                <Icon name="users" />
+                Logout
             </Menu.Item>
-          </NavLink>
-        </>
-      )}
+            </NavLink>
+          </>
+        )}
     </>
   );
 };
