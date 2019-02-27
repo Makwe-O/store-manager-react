@@ -1,5 +1,6 @@
 const initialState = {
-  products: []
+  products: [],
+  message: ''
 };
 
 const productsReducer = (state = initialState, { type, payload }) => {
@@ -10,8 +11,9 @@ const productsReducer = (state = initialState, { type, payload }) => {
       const newState = state.products.filter(
         product => payload !== product.product_id
       );
-      console.log(newState);
       return { ...state, products: newState };
+    case 'ADD_PRODUCTS_SUCCESS':
+      return { ...state, ...payload };
     default:
       return state;
   }

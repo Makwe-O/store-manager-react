@@ -75,38 +75,38 @@ class SalesRecords extends Component {
                   {sales_record.length === 0 ? (
                     <Segment style={{ height: '50vh' }}>
                       <Dimmer active inverted>
-                        <Loader size="massive">Getting things Ready 👍</Loader>
+                        <Loader size="massive">Getting your sales record 👍</Loader>
                       </Dimmer>
 
                       <Image src="/images/wireframe/paragraph.png" />
                     </Segment>
                   ) : (
-                    <Table celled padded>
-                      <Table.Header>
-                        <Table.Row>
-                          <Table.HeaderCell>Attendant Name</Table.HeaderCell>
-                          <Table.HeaderCell>Product Name </Table.HeaderCell>
-                          <Table.HeaderCell>Price</Table.HeaderCell>
-                          <Table.HeaderCell>Quantity</Table.HeaderCell>
-                          <Table.HeaderCell>Date</Table.HeaderCell>
-                        </Table.Row>
-                      </Table.Header>
-
-                      <Table.Body>
-                        {sales_record.map(sale_record => (
-                          <Table.Row key={sale_record.sales_record_id}>
-                            <Table.Cell>{sale_record.name}</Table.Cell>
-                            <Table.Cell>{sale_record.product_name}</Table.Cell>
-                            <Table.Cell textAlign="center">
-                              {sale_record.price}
-                            </Table.Cell>
-                            <Table.Cell>{sale_record.sales_amount}</Table.Cell>
-                            <Table.Cell>{sale_record.date}</Table.Cell>
+                      <Table celled padded>
+                        <Table.Header>
+                          <Table.Row>
+                            <Table.HeaderCell>Attendant Name</Table.HeaderCell>
+                            <Table.HeaderCell>Product Name </Table.HeaderCell>
+                            <Table.HeaderCell>Price</Table.HeaderCell>
+                            <Table.HeaderCell>Quantity</Table.HeaderCell>
+                            <Table.HeaderCell>Date</Table.HeaderCell>
                           </Table.Row>
-                        ))}
-                      </Table.Body>
-                    </Table>
-                  )}
+                        </Table.Header>
+
+                        <Table.Body>
+                          {sales_record.map(sale_record => (
+                            <Table.Row key={sale_record.sales_record_id}>
+                              <Table.Cell>{sale_record.name}</Table.Cell>
+                              <Table.Cell>{sale_record.product_name}</Table.Cell>
+                              <Table.Cell textAlign="center">
+                                {sale_record.price}
+                              </Table.Cell>
+                              <Table.Cell>{sale_record.sales_amount}</Table.Cell>
+                              <Table.Cell>{sale_record.date}</Table.Cell>
+                            </Table.Row>
+                          ))}
+                        </Table.Body>
+                      </Table>
+                    )}
                 </Segment>
               </Sidebar.Pusher>
             </Container>

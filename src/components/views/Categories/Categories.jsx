@@ -47,7 +47,6 @@ class Categories extends Component {
   render() {
     const { role } = this.props;
     const { categories } = this.props;
-    console.log(this.props);
     const { visible } = this.state;
     return (
       <>
@@ -76,52 +75,52 @@ class Categories extends Component {
                   {categories.length === 0 ? (
                     <Segment style={{ height: '50vh' }}>
                       <Dimmer active inverted>
-                        <Loader size="massive">Getting things Ready 👍</Loader>
+                        <Loader size="massive">Getting your categories 👍</Loader>
                       </Dimmer>
 
                       <Image src="/images/wireframe/paragraph.png" />
                     </Segment>
                   ) : (
-                    <Table celled padded>
-                      <Table.Header>
-                        <Table.Row>
-                          <Table.HeaderCell singleLine>Name</Table.HeaderCell>
+                      <Table celled padded>
+                        <Table.Header>
+                          <Table.Row>
+                            <Table.HeaderCell singleLine>Name</Table.HeaderCell>
 
-                          <Table.HeaderCell>Action</Table.HeaderCell>
-                        </Table.Row>
-                      </Table.Header>
-
-                      <Table.Body>
-                        {categories.map(category => (
-                          <Table.Row key={category.category_id}>
-                            <Table.Cell>
-                              <Header as="h2">{category.category_name}</Header>
-                            </Table.Cell>
-
-                            <Table.Cell>
-                              <Button.Group size="large">
-                                <Button animated positive>
-                                  <Button.Content visible>Edit</Button.Content>
-                                  <Button.Content hidden>
-                                    <Icon name="pencil right" />
-                                  </Button.Content>
-                                </Button>
-                                <Button.Or />
-                                <Button animated negative>
-                                  <Button.Content visible>
-                                    Delete
-                                  </Button.Content>
-                                  <Button.Content hidden>
-                                    <Icon name="trash alternate outline left " />
-                                  </Button.Content>
-                                </Button>
-                              </Button.Group>
-                            </Table.Cell>
+                            <Table.HeaderCell>Action</Table.HeaderCell>
                           </Table.Row>
-                        ))}
-                      </Table.Body>
-                    </Table>
-                  )}
+                        </Table.Header>
+
+                        <Table.Body>
+                          {categories.map(category => (
+                            <Table.Row key={category.category_id}>
+                              <Table.Cell>
+                                <Header as="h2">{category.category_name}</Header>
+                              </Table.Cell>
+
+                              <Table.Cell>
+                                <Button.Group size="large">
+                                  <Button animated positive>
+                                    <Button.Content visible>Edit</Button.Content>
+                                    <Button.Content hidden>
+                                      <Icon name="pencil right" />
+                                    </Button.Content>
+                                  </Button>
+                                  <Button.Or />
+                                  <Button animated negative>
+                                    <Button.Content visible>
+                                      Delete
+                                  </Button.Content>
+                                    <Button.Content hidden>
+                                      <Icon name="trash alternate outline left " />
+                                    </Button.Content>
+                                  </Button>
+                                </Button.Group>
+                              </Table.Cell>
+                            </Table.Row>
+                          ))}
+                        </Table.Body>
+                      </Table>
+                    )}
                 </Segment>
               </Sidebar.Pusher>
             </Container>

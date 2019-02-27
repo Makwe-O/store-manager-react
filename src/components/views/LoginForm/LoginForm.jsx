@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 import PropTypes from 'prop-types';
 import { loginLocal } from '../../../actions/login/loginAction';
@@ -78,10 +78,10 @@ class LoginForm extends Component {
               Submit
             </Button>
           ) : (
-            <Button loading color="blue">
-              Loading
+              <Button loading color="blue">
+                Loading
             </Button>
-          )}
+            )}
         </Form>
       </>
     );
