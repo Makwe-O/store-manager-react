@@ -1,10 +1,21 @@
 import decodeJwt from 'jwt-decode';
-import { decode } from 'punycode';
 import makeRequest from '../../utils/axiosSetup';
-import SuccessMessage from '../../components/views/Message/ErrorMessage/ErrorMessage';
 
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
+export const LOGIN_USER_RESET = 'LOGIN_USER_RESET';
+
+export const loginFailure = error => ({
+  type: LOGIN_USER_ERROR,
+  payload: error
+});
+
+export const loginReset = () => ({
+  type: LOGIN_USER_RESET,
+  payload: {
+    message: ''
+  }
+});
 
 export const loginLocal = ({ email, password }, history) => async dispatch => {
   try {
@@ -26,16 +37,14 @@ export const loginLocal = ({ email, password }, history) => async dispatch => {
     });
 
     setTimeout(() => {
+      dispatch(loginReset());
       role === 'Admin' ? history.push('/admin') : history.push('./attendant');
     }, 3000);
   } catch (error) {
-    const {
-      response: { data }
-    } = error;
-
-    dispatch({
-      type: LOGIN_USER_ERROR,
-      payload: { message: data.message }
-    });
+    dispatch(loginFailure({ message: error.response.data.message }));
+    console.log(error.response.data.message);
+    setTimeout(() => {
+      dispatch(loginReset());
+    }, 6000);
   }
 };

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Form } from 'semantic-ui-react';
-
+import { Button, Form, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { loginLocal } from '../../../actions/login/loginAction';
-import SuccessMessage from '../Message/SuccessMessage/SuccessMessage';
-import ErrorMessage from '../Message/ErrorMessage/ErrorMessage';
 
 class LoginForm extends Component {
   state = {
@@ -45,15 +42,11 @@ class LoginForm extends Component {
   render() {
     const { message } = this.props;
     const { isLoading } = this.state;
+    console.log(message);
 
     return (
       <>
-        {message === 'Could not login. Wrong Email or Password' ? (
-          <ErrorMessage message={message} />
-        ) : null}
-        {message === 'login. Auth Successful' ? (
-          <SuccessMessage message={message} />
-        ) : null}
+        {message.length !== 0 ? <Message info content={message} /> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Email</label>
@@ -78,19 +71,22 @@ class LoginForm extends Component {
               Submit
             </Button>
           ) : (
-              <Button loading color="blue">
-                Loading
+            <Button loading color="blue">
+              Loading
             </Button>
-            )}
+          )}
         </Form>
       </>
     );
   }
 }
-const mapStateToProps = state => ({
-  auth: state.auth,
-  message: state.loginReducer.message
-});
+const mapStateToProps = state => {
+  const {
+    auth,
+    loginReducer: { message }
+  } = state;
+  return { auth, message };
+};
 
 const mapDispatchToProps = dispatch => ({
   completeLoginLocal: (userInfo, history) =>

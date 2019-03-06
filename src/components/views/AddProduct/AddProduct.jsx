@@ -8,15 +8,14 @@ import {
   Segment,
   Sidebar,
   Container,
-  Form
+  Form,
+  Message
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
-import SuccessMessage from '../Message/SuccessMessage/SuccessMessage';
 import * as productsActions from '../../../actions/products/productsAction';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
 
-
-class AdminDashBoard extends Component {
+class AddProduct extends Component {
   state = {
     visible: false,
     product_name: '',
@@ -80,7 +79,7 @@ class AdminDashBoard extends Component {
     });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({
       isLoading: true
@@ -102,6 +101,9 @@ class AdminDashBoard extends Component {
       product_image,
       history
     );
+    this.setState({
+      isLoading: false
+    });
   };
 
   checkRoleAdmin() {
@@ -115,10 +117,8 @@ class AdminDashBoard extends Component {
   }
 
   render() {
-    const { role, categories } = this.props;
-    const { message } = this.props;
+    const { role, categories, message } = this.props;
     const { visible, isLoading } = this.state;
-
 
     return (
       <>
@@ -143,8 +143,12 @@ class AdminDashBoard extends Component {
                   Show sidebar
                 </Button>
                 <Segment basic>
-                  <Header as="h2">DashBoard</Header>
+                  <Header as="h2">Add Product</Header>
+
                   <Form onSubmit={this.handleSubmit}>
+                    {message.length !== 0 ? (
+                      <Message info content={message} />
+                    ) : null}
                     <Form.Field>
                       <label>Product Name</label>
                       <input
@@ -195,20 +199,17 @@ class AdminDashBoard extends Component {
                         onChange={this.onImageUpload}
                       />
                     </Form.Field>
-                    {message === 'Product Created!' ? (
-                      <SuccessMessage message={message} />
-                    ) : null}
+
                     {isLoading === false ? (
                       <Button type="submit" color="blue" id="loginButton">
                         Create
-            </Button>
+                      </Button>
                     ) : (
-                        <Button loading color="blue">
-                          Creating
-            </Button>
-                      )}
+                      <Button loading color="blue">
+                        Creating
+                      </Button>
+                    )}
                   </Form>
-
                 </Segment>
               </Sidebar.Pusher>
             </Container>
@@ -222,12 +223,14 @@ class AdminDashBoard extends Component {
 const mapStateToProps = state => {
   const {
     loginReducer: { role },
-    categoriesReducer: { categories }
+    categoriesReducer: { categories },
+    productsReducer: { message }
   } = state;
 
   return {
     role,
-    categories
+    categories,
+    message
   };
 };
 const mapDispatchToProps = {
@@ -237,4 +240,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AdminDashBoard);
+)(AddProduct);

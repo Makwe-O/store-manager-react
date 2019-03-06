@@ -11,13 +11,18 @@ import {
   Container,
   Table,
   Dimmer,
-  Loader
+  Loader,
+  Message
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 
 class AdminDashBoard extends Component {
-  state = { visible: false, open: false };
+  state = {
+    visible: false,
+    open: false,
+    isLoading: true
+  };
 
   async componentWillMount() {
     this.checkRoleAdmin();
@@ -25,7 +30,8 @@ class AdminDashBoard extends Component {
 
   async componentDidMount() {
     const { getProducts } = this.props;
-    getProducts();
+    await getProducts();
+    await this.setState({ isLoading: false });
   }
 
   handleHideClick = () => this.setState({ visible: false });
@@ -45,8 +51,8 @@ class AdminDashBoard extends Component {
   }
 
   render() {
-    const { products, role, deleteProducts } = this.props;
-    const { visible } = this.state;
+    const { products, role, deleteProducts, message } = this.props;
+    const { visible, isLoading } = this.state;
 
     return (
       <>
@@ -72,7 +78,10 @@ class AdminDashBoard extends Component {
                 </Button>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
-                  {products.length === 0 ? (
+                  {message.length !== 0 ? (
+                    <Message info content={message} />
+                  ) : null}
+                  {isLoading ? (
                     <Segment
                       className="segment-style"
                       style={{ height: '50vh' }}
@@ -83,6 +92,8 @@ class AdminDashBoard extends Component {
 
                       <Image src="/images/wireframe/paragraph.png" />
                     </Segment>
+                  ) : products.length === 0 ? (
+                    <Message info content="The are no products in the store" />
                   ) : (
                     <Table celled padded>
                       <Table.Header>
@@ -150,13 +161,14 @@ class AdminDashBoard extends Component {
 
 const mapStateToProps = state => {
   const {
-    productsReducer: { products },
+    productsReducer: { products, message },
     loginReducer: { role }
   } = state;
 
   return {
     products,
-    role
+    role,
+    message
   };
 };
 const mapDispatchToProps = {
