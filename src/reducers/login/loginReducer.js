@@ -1,7 +1,8 @@
 import decodeJwt from 'jwt-decode';
 import {
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR
+  LOGIN_USER_ERROR,
+  LOGIN_USER_RESET
 } from '../../actions/login/loginAction';
 
 const token = localStorage.getItem('userToken');
@@ -19,6 +20,11 @@ const loginReducer = (state = initialAuthState, { type, payload }) => {
       return {
         ...state,
         ...payload
+      };
+    case LOGIN_USER_RESET:
+      return {
+        ...state,
+        message: payload.message
       };
     default:
       return state;
