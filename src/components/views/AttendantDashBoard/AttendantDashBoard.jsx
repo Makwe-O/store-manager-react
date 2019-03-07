@@ -13,9 +13,12 @@ import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import VerticalCard from '../VerticalCard/VerticalCard';
 import VerticalCardLoader from '../VerticalCard/VerticalCardLoader';
+import Paginate from '../../common/Paginate';
+import paginate from '../../../utils/paginate/paginate';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
-class AttendantDashBoard extends Component {
-  state = { visible: false };
+export class AttendantDashBoard extends Component {
+  state = { visible: false, pageSize: 8, currentPage: 1 };
 
   async componentDidMount() {
     this.checkRoleAttendant();
@@ -38,10 +41,17 @@ class AttendantDashBoard extends Component {
       return history.push('/admin');
     }
   }
+  handlePageChange = page => {
+    this.setState({
+      currentPage: page
+    });
+  };
 
   render() {
     const { products } = this.props;
-    const { visible } = this.state;
+    const { visible, pageSize, currentPage } = this.state;
+    const paginatedProducts = paginate(products, currentPage, pageSize);
+
     return (
       <>
         <div className="full-height">
@@ -61,8 +71,9 @@ class AttendantDashBoard extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  sidebar
                 </Button>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
@@ -96,24 +107,32 @@ class AttendantDashBoard extends Component {
                       </Grid>
                     </>
                   ) : (
-                    <Grid>
-                      {products.map(product => (
-                        <Grid.Column
-                          mobile={16}
-                          tablet={8}
-                          computer={4}
-                          key={product.product_id}
-                        >
-                          <VerticalCard
-                            name={product.product_name}
-                            image={product.product_image}
-                            price={product.price}
-                            quantity={product.quantity}
-                            category={product.category_name}
-                          />
-                        </Grid.Column>
-                      ))}
-                    </Grid>
+                    <>
+                      <Grid>
+                        {paginatedProducts.map(product => (
+                          <Grid.Column
+                            mobile={16}
+                            tablet={8}
+                            computer={4}
+                            key={product.product_id}
+                          >
+                            <VerticalCard
+                              name={product.product_name}
+                              image={product.product_image}
+                              price={product.price}
+                              quantity={product.quantity}
+                              category={product.category_name}
+                            />
+                          </Grid.Column>
+                        ))}
+                      </Grid>
+                      <Paginate
+                        productCount={products.length}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={this.handlePageChange}
+                      />
+                    </>
                   )}
                 </Segment>
               </Sidebar.Pusher>
@@ -125,7 +144,7 @@ class AttendantDashBoard extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     productsReducer: { products },
     loginReducer: { role }
@@ -136,7 +155,7 @@ const mapStateToProps = state => {
     role
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   getProducts: productsActions.getProducts
 };
 export default connect(

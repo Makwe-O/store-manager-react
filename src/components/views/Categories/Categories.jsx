@@ -10,14 +10,13 @@ import {
   Dimmer,
   Loader,
   Image,
-  Table,
-  Icon,
   List
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
-class Categories extends Component {
+export class Categories extends Component {
   state = { visible: false };
 
   async componentWillMount() {
@@ -68,11 +67,12 @@ class Categories extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  sidebar
                 </Button>
                 <Segment basic>
-                  <Header as="h2">DashBoard</Header>
+                  <Header as="h2">Categories</Header>
                   {categories.length === 0 ? (
                     <Segment style={{ height: '50vh' }}>
                       <Dimmer active inverted>
@@ -101,7 +101,7 @@ class Categories extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     categoriesReducer: { categories },
     loginReducer: { role }
@@ -112,7 +112,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   getCategories: categoriesActions.getCategories
 };
 export default connect(

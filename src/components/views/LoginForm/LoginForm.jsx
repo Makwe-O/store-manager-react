@@ -5,7 +5,7 @@ import { Button, Form, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { loginLocal } from '../../../actions/login/loginAction';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
   state = {
     email: '',
     password: '',
@@ -14,6 +14,7 @@ class LoginForm extends Component {
 
   onEmailChange = e => {
     const email = e.target.value;
+
     this.setState({
       email
     });
@@ -46,12 +47,13 @@ class LoginForm extends Component {
     return (
       <>
         {message.length !== 0 ? <Message info content={message} /> : null}
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} id="submit">
           <Form.Field>
             <label>Email</label>
             <input
               type="email"
               placeholder="Email"
+              id="email"
               required
               onChange={this.onEmailChange}
             />
@@ -60,6 +62,7 @@ class LoginForm extends Component {
             <label>Password</label>
             <input
               placeholder="Password"
+              id="password"
               type="password"
               required
               onChange={this.onPasswordChange}
@@ -79,7 +82,7 @@ class LoginForm extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     auth,
     loginReducer: { message }
@@ -87,7 +90,7 @@ const mapStateToProps = state => {
   return { auth, message };
 };
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   completeLoginLocal: (userInfo, history) =>
     dispatch(loginLocal(userInfo, history))
 });
