@@ -8,6 +8,7 @@ import Categories from '../components/views/Categories/Categories';
 import SalesRecords from '../components/views/SalesRecords/SalesRecords';
 import AddProduct from '../components/views/AddProduct/AddProduct';
 import AddAttendant from '../components/views/AddAttendant/AddAttendant';
+import AddCategory from '../components/views/AddCategory/AddCategory';
 
 export default (
   <BrowserRouter>
@@ -16,9 +17,10 @@ export default (
         <Route path="/" component={LandingPage} exact />
         <Route path="/admin" component={AdminDashBoard} exact />
         <Route path="/categories" component={Categories} exact />
+        <Route path="/addcategory" component={AddCategory} exact />
         <Route path="/sales" component={SalesRecords} exact />
-        <Route path="/addProduct" component={AddProduct} exact />
-        <Route path="/addAttendant" component={AddAttendant} exact />
+        <Route path="/addproduct" component={AddProduct} exact />
+        <Route path="/addattendant" component={AddAttendant} exact />
         <Route path="/attendant" component={AttendantDashBoard} exact />
 
         <Route component={NotFound} />
