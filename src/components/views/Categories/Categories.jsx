@@ -11,7 +11,8 @@ import {
   Loader,
   Image,
   Table,
-  Icon
+  Icon,
+  List
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
@@ -75,52 +76,22 @@ class Categories extends Component {
                   {categories.length === 0 ? (
                     <Segment style={{ height: '50vh' }}>
                       <Dimmer active inverted>
-                        <Loader size="massive">Getting your categories 👍</Loader>
+                        <Loader size="massive">
+                          Getting your categories 👍
+                        </Loader>
                       </Dimmer>
 
                       <Image src="/images/wireframe/paragraph.png" />
                     </Segment>
                   ) : (
-                      <Table celled padded>
-                        <Table.Header>
-                          <Table.Row>
-                            <Table.HeaderCell singleLine>Name</Table.HeaderCell>
-
-                            <Table.HeaderCell>Action</Table.HeaderCell>
-                          </Table.Row>
-                        </Table.Header>
-
-                        <Table.Body>
-                          {categories.map(category => (
-                            <Table.Row key={category.category_id}>
-                              <Table.Cell>
-                                <Header as="h2">{category.category_name}</Header>
-                              </Table.Cell>
-
-                              <Table.Cell>
-                                <Button.Group size="large">
-                                  <Button animated positive>
-                                    <Button.Content visible>Edit</Button.Content>
-                                    <Button.Content hidden>
-                                      <Icon name="pencil right" />
-                                    </Button.Content>
-                                  </Button>
-                                  <Button.Or />
-                                  <Button animated negative>
-                                    <Button.Content visible>
-                                      Delete
-                                  </Button.Content>
-                                    <Button.Content hidden>
-                                      <Icon name="trash alternate outline left " />
-                                    </Button.Content>
-                                  </Button>
-                                </Button.Group>
-                              </Table.Cell>
-                            </Table.Row>
-                          ))}
-                        </Table.Body>
-                      </Table>
-                    )}
+                    <List animated size="massive">
+                      {categories.map(category => (
+                        <List.Item key={category.category_id}>
+                          {category.category_name}
+                        </List.Item>
+                      ))}
+                    </List>
+                  )}
                 </Segment>
               </Sidebar.Pusher>
             </Container>

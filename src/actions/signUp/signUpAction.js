@@ -38,7 +38,6 @@ export const signUp = (name, email, role, password) => async dispatch => {
       dispatch(signUpReset());
     }, 5000);
   } catch (error) {
-    console.log(error.response.data.message);
     dispatch(signUpFailure({ message: error.response.data.message }));
     setTimeout(() => {
       dispatch(signUpReset());

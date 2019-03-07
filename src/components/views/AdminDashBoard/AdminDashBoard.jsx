@@ -93,7 +93,7 @@ class AdminDashBoard extends Component {
                       <Image src="/images/wireframe/paragraph.png" />
                     </Segment>
                   ) : products.length === 0 ? (
-                    <Message info content="The are no products in the store" />
+                    <h2>There are no products in the store</h2>
                   ) : (
                     <Table celled padded>
                       <Table.Header>
@@ -121,13 +121,6 @@ class AdminDashBoard extends Component {
                             <Table.Cell>{product.category_name}</Table.Cell>
                             <Table.Cell>
                               <Button.Group size="large">
-                                <Button animated positive>
-                                  <Button.Content visible>Edit</Button.Content>
-                                  <Button.Content hidden>
-                                    <Icon name="pencil right" />
-                                  </Button.Content>
-                                </Button>
-                                <Button.Or />
                                 <Button animated negative>
                                   <Button.Content visible>
                                     Delete
