@@ -47,7 +47,6 @@ class AddCategory extends Component {
     this.setState({
       isLoading: false
     });
-    console.log(this.state);
   };
 
   checkRoleAdmin() {

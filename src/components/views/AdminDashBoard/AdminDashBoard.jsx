@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
 class AdminDashBoard extends Component {
   state = {
@@ -73,8 +74,9 @@ class AdminDashBoard extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  Sidebar
                 </Button>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>

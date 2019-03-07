@@ -7,25 +7,36 @@ import {
   Segment,
   Sidebar,
   Container,
-  Form,
-  Message
+  Message,
+  Form
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
-import * as signUpActions from '../../../actions/signUp/signUpAction';
-import HeaderContent from '../HeaderContent/HeaderContent';
+import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
+import * as productsActions from '../../../actions/products/productsAction';
 
-class AddAttendant extends Component {
+class AddSales extends Component {
   state = {
-    name: '',
-    email: '',
-    role: 'Attendant',
-    password: '',
-    isLoading: false,
-    visible: false
+    visible: false,
+    user_id: this.props.user_id,
+    product_id: '',
+    sales_amount: '',
+    isLoading: false
   };
 
   async componentDidMount() {
-    this.checkRoleAdmin();
+    this.checkRoleAttendant();
+    const { getProducts } = this.props;
+    getProducts();
+  }
+
+  checkRoleAttendant() {
+    const { role, history } = this.props;
+    if (!role) {
+      return history.push('/');
+    }
+    if (role === 'Admin') {
+      return history.push('/admin');
+    }
   }
 
   handleHideClick = () => this.setState({ visible: false });
@@ -34,16 +45,14 @@ class AddAttendant extends Component {
 
   handleSidebarHide = () => this.setState({ visible: false });
 
-  onAttendantNameChange = e => {
-    this.setState({ name: e.target.value });
+  onProductChange = e => {
+    const product_id = parseInt(e.target.value);
+    this.setState({ product_id });
   };
 
-  onEmailChange = e => {
-    this.setState({ email: e.target.value });
-  };
-
-  onPasswordChange = e => {
-    this.setState({ password: e.target.value });
+  onSalesAmountChange = e => {
+    const sales_amount = parseInt(e.target.value);
+    this.setState({ sales_amount });
   };
 
   handleSubmit = async e => {
@@ -51,27 +60,16 @@ class AddAttendant extends Component {
     this.setState({
       isLoading: true
     });
-
-    const { name, email, role, password } = this.state;
-    const { signUpAction, history } = this.props;
-    await signUpAction(name, email, role, password, history);
+    const { user_id, product_id, sales_amount } = this.state;
+    const { addSalesRecord } = this.props;
+    await addSalesRecord(user_id, product_id, sales_amount);
     this.setState({
       isLoading: false
     });
   };
 
-  checkRoleAdmin() {
-    const { role, history } = this.props;
-    if (!role) {
-      return history.push('/');
-    }
-    if (role === 'Attendant') {
-      return history.push('/attendant');
-    }
-  }
-
   render() {
-    const { role, message } = this.props;
+    const { role, products, message } = this.props;
     const { visible, isLoading } = this.state;
 
     return (
@@ -93,17 +91,11 @@ class AddAttendant extends Component {
 
             <Container>
               <Sidebar.Pusher>
-                <HeaderContent />
-
-                <Button
-                  primary
-                  disabled={visible}
-                  onClick={this.handleShowClick}
-                >
-                  SideBar
+                <Button disabled={visible} onClick={this.handleShowClick}>
+                  Show sidebar
                 </Button>
                 <Segment basic>
-                  <Header as="h2">Add Attendant</Header>
+                  <Header as="h2">Add Sale Record</Header>
 
                   <Form onSubmit={this.handleSubmit}>
                     {message.length !== 0 ? (
@@ -111,31 +103,26 @@ class AddAttendant extends Component {
                     ) : null}
 
                     <Form.Field>
-                      <label>Attendant Name</label>
-                      <input
-                        placeholder="Attendant Name"
-                        type="text"
-                        required
-                        onChange={this.onAttendantNameChange}
-                      />
-                    </Form.Field>
-                    <Form.Field>
-                      <label>Email</label>
-                      <input
-                        placeholder="Email"
-                        type="email"
-                        required
-                        onChange={this.onEmailChange}
-                      />
+                      <label>Product</label>
+                      <select onChange={this.onProductChange}>
+                        {products.map(product => (
+                          <option
+                            value={product.product_id}
+                            key={product.product_id}
+                          >
+                            {product.product_name}
+                          </option>
+                        ))}
+                      </select>
                     </Form.Field>
 
                     <Form.Field>
-                      <label>Password</label>
+                      <label>Amount</label>
                       <input
-                        placeholder="Password"
-                        type="text"
+                        placeholder="Amount"
+                        type="number"
                         required
-                        onChange={this.onPasswordChange}
+                        onChange={this.onSalesAmountChange}
                       />
                     </Form.Field>
 
@@ -161,20 +148,23 @@ class AddAttendant extends Component {
 
 const mapStateToProps = state => {
   const {
-    loginReducer: { role },
-    signUpReducer: { message }
+    loginReducer: { role, user_id },
+    productsReducer: { products },
+    salesRecordsReducer: { message }
   } = state;
 
   return {
     role,
+    user_id,
+    products,
     message
   };
 };
 const mapDispatchToProps = {
-  signUpAction: signUpActions.signUp
+  getProducts: productsActions.getProducts,
+  addSalesRecord: salesRecordsActions.addSalesRecord
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddAttendant);
+)(AddSales);
