@@ -5,3 +5,15 @@
   box-shadow: none !important;
   border: none !important;
 }
+
+.bars {
+  width: 35px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+}
+
+.navStyle {
+  display: flex;
+  justify-content: space-between;
+}

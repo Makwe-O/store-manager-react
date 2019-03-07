@@ -1,11 +1,31 @@
 import React from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
 import './SidebarNav.scss';
+import * as loginActions from '../../../actions/login/loginAction';
 
-const SidebarNav = ({ navOption }) => {
+const SidebarNav = ({ navOption, logout, history }) => {
+  const handleLogout = async e => {
+    e.preventDefault();
+    await logout();
+    history.push('/');
+  };
+
+  const imgStyle = {
+    marginBottom: '20px'
+  };
+
   return (
     <>
+      <div style={imgStyle}>
+        <Image
+          src="https://res.cloudinary.com/dnavbc7ny/image/upload/v1551951649/Screen_Shot_2019-03-07_at_10.39.52_AM_epilme.png"
+          size="small"
+        />
+      </div>
+
       {navOption === 'Admin' ? (
         <>
           <NavLink activeClassName="is-active" to="/admin" exact>
@@ -46,6 +66,7 @@ const SidebarNav = ({ navOption }) => {
           <NavLink
             className="navstyle"
             activeClassName="is-active"
+            onClick={handleLogout}
             to="/"
             exact
           >
@@ -64,7 +85,7 @@ const SidebarNav = ({ navOption }) => {
             </Menu.Item>
           </NavLink>
 
-          <NavLink activeClassName="is-active" to="/1" exact>
+          <NavLink activeClassName="is-active" to="/addsales" exact>
             <Menu.Item as="div">
               <Icon name="database" />
               Sales Record
@@ -78,7 +99,12 @@ const SidebarNav = ({ navOption }) => {
             </Menu.Item>
           </NavLink>
 
-          <NavLink activeClassName="is-active" to="/" exact>
+          <NavLink
+            activeClassName="is-active"
+            to="/"
+            onClick={handleLogout}
+            exact
+          >
             <Menu.Item as="div">
               <Icon name="users" />
               Logout
@@ -90,4 +116,10 @@ const SidebarNav = ({ navOption }) => {
   );
 };
 
-export default SidebarNav;
+const mapDispatchToProps = {
+  logout: loginActions.logout
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(SidebarNav));

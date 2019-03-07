@@ -17,15 +17,26 @@ import VerticalCardLoader from '../VerticalCard/VerticalCardLoader';
 class AttendantDashBoard extends Component {
   state = { visible: false };
 
+  async componentDidMount() {
+    this.checkRoleAttendant();
+    const { getProducts } = this.props;
+    getProducts();
+  }
+
   handleHideClick = () => this.setState({ visible: false });
 
   handleShowClick = () => this.setState({ visible: true });
 
   handleSidebarHide = () => this.setState({ visible: false });
 
-  async componentDidMount() {
-    const { getProducts } = this.props;
-    getProducts();
+  checkRoleAttendant() {
+    const { role, history } = this.props;
+    if (!role) {
+      return history.push('/');
+    }
+    if (role === 'Admin') {
+      return history.push('/admin');
+    }
   }
 
   render() {
@@ -85,25 +96,25 @@ class AttendantDashBoard extends Component {
                       </Grid>
                     </>
                   ) : (
-                      <Grid>
-                        {products.map(product => (
-                          <Grid.Column
-                            mobile={16}
-                            tablet={8}
-                            computer={4}
-                            key={product.product_id}
-                          >
-                            <VerticalCard
-                              name={product.product_name}
-                              image={product.product_image}
-                              price={product.price}
-                              quantity={product.quantity}
-                              category={product.category_name}
-                            />
-                          </Grid.Column>
-                        ))}
-                      </Grid>
-                    )}
+                    <Grid>
+                      {products.map(product => (
+                        <Grid.Column
+                          mobile={16}
+                          tablet={8}
+                          computer={4}
+                          key={product.product_id}
+                        >
+                          <VerticalCard
+                            name={product.product_name}
+                            image={product.product_image}
+                            price={product.price}
+                            quantity={product.quantity}
+                            category={product.category_name}
+                          />
+                        </Grid.Column>
+                      ))}
+                    </Grid>
+                  )}
                 </Segment>
               </Sidebar.Pusher>
             </Container>
@@ -116,11 +127,13 @@ class AttendantDashBoard extends Component {
 
 const mapStateToProps = state => {
   const {
-    productsReducer: { products }
+    productsReducer: { products },
+    loginReducer: { role }
   } = state;
 
   return {
-    products
+    products,
+    role
   };
 };
 const mapDispatchToProps = {
