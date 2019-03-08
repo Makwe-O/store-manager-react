@@ -15,8 +15,9 @@ import {
 } from 'semantic-ui-react';
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
-class SalesRecords extends Component {
+export class SalesRecords extends Component {
   state = { visible: false };
 
   handleHideClick = () => this.setState({ visible: false });
@@ -67,14 +68,15 @@ class SalesRecords extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  sidebar
                 </Button>
                 <Segment basic>
-                  <Header as="h2">DashBoard</Header>
-                  <Header as="h3">{moment().format('LL')}</Header>
+                  <Header as="h2">Sales Record</Header>
+
                   {sales_record.length === 0 ? (
-                    <Segment style={{ height: '50vh' }}>
+                    <Segment className="segment-height">
                       <Dimmer active inverted>
                         <Loader size="massive">
                           Getting your sales record 👍
@@ -122,7 +124,7 @@ class SalesRecords extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     salesRecordsReducer: { sales_record },
     loginReducer: { role }

@@ -14,7 +14,7 @@ import SidebarNav from '../SidebarNav/SidebarNav';
 import * as signUpActions from '../../../actions/signUp/signUpAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 
-class AddAttendant extends Component {
+export class AddAttendant extends Component {
   state = {
     name: '',
     email: '',
@@ -105,7 +105,7 @@ class AddAttendant extends Component {
                 <Segment basic>
                   <Header as="h2">Add Attendant</Header>
 
-                  <Form onSubmit={this.handleSubmit}>
+                  <Form onSubmit={this.handleSubmit} id="submit">
                     {message.length !== 0 ? (
                       <Message info content={message} />
                     ) : null}
@@ -114,6 +114,7 @@ class AddAttendant extends Component {
                       <label>Attendant Name</label>
                       <input
                         placeholder="Attendant Name"
+                        id="name"
                         type="text"
                         required
                         onChange={this.onAttendantNameChange}
@@ -123,6 +124,7 @@ class AddAttendant extends Component {
                       <label>Email</label>
                       <input
                         placeholder="Email"
+                        id="email"
                         type="email"
                         required
                         onChange={this.onEmailChange}
@@ -133,6 +135,7 @@ class AddAttendant extends Component {
                       <label>Password</label>
                       <input
                         placeholder="Password"
+                        id="password"
                         type="text"
                         required
                         onChange={this.onPasswordChange}
@@ -159,7 +162,7 @@ class AddAttendant extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     loginReducer: { role },
     signUpReducer: { message }
@@ -170,7 +173,7 @@ const mapStateToProps = state => {
     message
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   signUpAction: signUpActions.signUp
 };
 

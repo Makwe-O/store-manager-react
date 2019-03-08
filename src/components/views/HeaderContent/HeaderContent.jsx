@@ -8,11 +8,11 @@ const HeaderContent = () => {
       <div className="navStyle">
         <div>
           <Image
-            src="https://res.cloudinary.com/dnavbc7ny/image/upload/v1551952415/logo_g7cllm.png"
-            size="small"
+            src="https://res.cloudinary.com/dnavbc7ny/image/upload/v1552002413/Screen_Shot_2019-03-08_at_12.46.24_AM_czpjnn.png"
+            size="large"
           />
         </div>
-        <Header as="h2">{moment().format('LL')}</Header>
+        <Header as="h3">{moment().format('LL')}</Header>
       </div>
     </>
   );

@@ -13,8 +13,9 @@ import {
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
 import * as productsActions from '../../../actions/products/productsAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
-class AddSales extends Component {
+export class AddSales extends Component {
   state = {
     visible: false,
     user_id: this.props.user_id,
@@ -91,20 +92,21 @@ class AddSales extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  sidebar
                 </Button>
                 <Segment basic>
                   <Header as="h2">Add Sale Record</Header>
 
-                  <Form onSubmit={this.handleSubmit}>
+                  <Form onSubmit={this.handleSubmit} id="submit">
                     {message.length !== 0 ? (
                       <Message info content={message} />
                     ) : null}
 
                     <Form.Field>
                       <label>Product</label>
-                      <select onChange={this.onProductChange}>
+                      <select onChange={this.onProductChange} id="product">
                         {products.map(product => (
                           <option
                             value={product.product_id}
@@ -120,6 +122,7 @@ class AddSales extends Component {
                       <label>Amount</label>
                       <input
                         placeholder="Amount"
+                        id="amount"
                         type="number"
                         required
                         onChange={this.onSalesAmountChange}
@@ -146,7 +149,7 @@ class AddSales extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     loginReducer: { role, user_id },
     productsReducer: { products },
@@ -160,7 +163,7 @@ const mapStateToProps = state => {
     message
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   getProducts: productsActions.getProducts,
   addSalesRecord: salesRecordsActions.addSalesRecord
 };

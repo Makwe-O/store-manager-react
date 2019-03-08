@@ -14,7 +14,7 @@ import {
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
 
-class AddCategory extends Component {
+export class AddCategory extends Component {
   state = {
     category_name: '',
     isLoading: false,
@@ -88,7 +88,7 @@ class AddCategory extends Component {
                 <Segment basic>
                   <Header as="h2">Add Category</Header>
 
-                  <Form onSubmit={this.handleSubmit}>
+                  <Form onSubmit={this.handleSubmit} id="submit">
                     {message.length !== 0 ? (
                       <Message info content={message} />
                     ) : null}
@@ -97,6 +97,7 @@ class AddCategory extends Component {
                       <label>Category Name</label>
                       <input
                         placeholder="Category Name"
+                        id="category"
                         type="text"
                         required
                         onChange={this.onCategoryNameChange}
@@ -122,7 +123,7 @@ class AddCategory extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     loginReducer: { role },
     categoriesReducer: { message }
@@ -133,7 +134,7 @@ const mapStateToProps = state => {
     message
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   addCategories: categoriesActions.addCategories
 };
 

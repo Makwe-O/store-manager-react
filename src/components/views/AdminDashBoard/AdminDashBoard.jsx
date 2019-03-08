@@ -17,12 +17,16 @@ import {
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
+import Paginate from '../../common/Paginate';
+import paginate from '../../../utils/paginate/paginate';
 
-class AdminDashBoard extends Component {
+export class AdminDashBoard extends Component {
   state = {
     visible: false,
     open: false,
-    isLoading: true
+    isLoading: true,
+    pageSize: 4,
+    currentPage: 1
   };
 
   async componentWillMount() {
@@ -50,10 +54,16 @@ class AdminDashBoard extends Component {
       return history.push('/attendant');
     }
   }
+  handlePageChange = page => {
+    this.setState({
+      currentPage: page
+    });
+  };
 
   render() {
     const { products, role, deleteProducts, message } = this.props;
-    const { visible, isLoading } = this.state;
+    const { visible, isLoading, pageSize, currentPage } = this.state;
+    const paginatedProducts = paginate(products, currentPage, pageSize);
 
     return (
       <>
@@ -97,52 +107,63 @@ class AdminDashBoard extends Component {
                   ) : products.length === 0 ? (
                     <h2>There are no products in the store</h2>
                   ) : (
-                    <Table celled padded>
-                      <Table.Header>
-                        <Table.Row>
-                          <Table.HeaderCell singleLine>Name</Table.HeaderCell>
-                          <Table.HeaderCell>Image</Table.HeaderCell>
-                          <Table.HeaderCell>Price</Table.HeaderCell>
-                          <Table.HeaderCell>Quantity</Table.HeaderCell>
-                          <Table.HeaderCell>Category</Table.HeaderCell>
-                          <Table.HeaderCell>Action</Table.HeaderCell>
-                        </Table.Row>
-                      </Table.Header>
-
-                      <Table.Body>
-                        {products.map(product => (
-                          <Table.Row key={product.product_id}>
-                            <Table.Cell>
-                              <Header as="h2">{product.product_name}</Header>
-                            </Table.Cell>
-                            <Table.Cell textAlign="center">
-                              <Image src={product.product_image} size="small" />
-                            </Table.Cell>
-                            <Table.Cell>{product.price}</Table.Cell>
-                            <Table.Cell>{product.quantity}</Table.Cell>
-                            <Table.Cell>{product.category_name}</Table.Cell>
-                            <Table.Cell>
-                              <Button.Group size="large">
-                                <Button animated negative>
-                                  <Button.Content visible>
-                                    Delete
-                                  </Button.Content>
-
-                                  <Button.Content
-                                    hidden
-                                    onClick={() =>
-                                      deleteProducts(product.product_id)
-                                    }
-                                  >
-                                    <Icon name="trash alternate outline left " />
-                                  </Button.Content>
-                                </Button>
-                              </Button.Group>
-                            </Table.Cell>
+                    <>
+                      <Table celled padded>
+                        <Table.Header>
+                          <Table.Row>
+                            <Table.HeaderCell singleLine>Name</Table.HeaderCell>
+                            <Table.HeaderCell>Image</Table.HeaderCell>
+                            <Table.HeaderCell>Price</Table.HeaderCell>
+                            <Table.HeaderCell>Quantity</Table.HeaderCell>
+                            <Table.HeaderCell>Category</Table.HeaderCell>
+                            <Table.HeaderCell>Action</Table.HeaderCell>
                           </Table.Row>
-                        ))}
-                      </Table.Body>
-                    </Table>
+                        </Table.Header>
+
+                        <Table.Body>
+                          {paginatedProducts.map(product => (
+                            <Table.Row key={product.product_id}>
+                              <Table.Cell>
+                                <Header as="h2">{product.product_name}</Header>
+                              </Table.Cell>
+                              <Table.Cell textAlign="center">
+                                <Image
+                                  src={product.product_image}
+                                  size="small"
+                                />
+                              </Table.Cell>
+                              <Table.Cell>{product.price}</Table.Cell>
+                              <Table.Cell>{product.quantity}</Table.Cell>
+                              <Table.Cell>{product.category_name}</Table.Cell>
+                              <Table.Cell>
+                                <Button.Group size="large">
+                                  <Button animated negative>
+                                    <Button.Content visible>
+                                      Delete
+                                    </Button.Content>
+
+                                    <Button.Content
+                                      hidden
+                                      onClick={() =>
+                                        deleteProducts(product.product_id)
+                                      }
+                                    >
+                                      <Icon name="trash alternate outline left " />
+                                    </Button.Content>
+                                  </Button>
+                                </Button.Group>
+                              </Table.Cell>
+                            </Table.Row>
+                          ))}
+                        </Table.Body>
+                      </Table>
+                      <Paginate
+                        productCount={products.length}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={this.handlePageChange}
+                      />
+                    </>
                   )}
                 </Segment>
               </Sidebar.Pusher>
@@ -154,7 +175,7 @@ class AdminDashBoard extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     productsReducer: { products, message },
     loginReducer: { role }
@@ -166,7 +187,7 @@ const mapStateToProps = state => {
     message
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   getProducts: productsActions.getProducts,
   deleteProducts: productsActions.deleteProducts
 };

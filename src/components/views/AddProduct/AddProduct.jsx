@@ -14,8 +14,9 @@ import {
 import SidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
-class AddProduct extends Component {
+export class AddProduct extends Component {
   state = {
     visible: false,
     product_name: '',
@@ -139,13 +140,14 @@ class AddProduct extends Component {
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
-                  Show sidebar
+                  sidebar
                 </Button>
                 <Segment basic>
                   <Header as="h2">Add Product</Header>
 
-                  <Form onSubmit={this.handleSubmit}>
+                  <Form onSubmit={this.handleSubmit} id="submit">
                     {message.length !== 0 ? (
                       <Message info content={message} />
                     ) : null}
@@ -153,6 +155,7 @@ class AddProduct extends Component {
                       <label>Product Name</label>
                       <input
                         placeholder="Product Name"
+                        id="product"
                         type="text"
                         required
                         onChange={this.onProductNameChange}
@@ -162,6 +165,7 @@ class AddProduct extends Component {
                       <label>Price</label>
                       <input
                         placeholder="Price"
+                        id="price"
                         type="number"
                         required
                         onChange={this.onPriceChange}
@@ -171,6 +175,7 @@ class AddProduct extends Component {
                       <label>Quantity</label>
                       <input
                         placeholder="Quantity"
+                        id="quantity"
                         type="number"
                         required
                         onChange={this.onQuantityChange}
@@ -179,7 +184,7 @@ class AddProduct extends Component {
 
                     <Form.Field>
                       <label>Category</label>
-                      <select onChange={this.onCategoryChange}>
+                      <select onChange={this.onCategoryChange} id="category">
                         {categories.map(category => (
                           <option
                             value={category.category_id}
@@ -194,6 +199,7 @@ class AddProduct extends Component {
                     <Form.Field>
                       <input
                         placeholder="Upload Image"
+                        id="image"
                         type="file"
                         required
                         onChange={this.onImageUpload}
@@ -220,7 +226,7 @@ class AddProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const {
     loginReducer: { role },
     categoriesReducer: { categories },
@@ -233,7 +239,7 @@ const mapStateToProps = state => {
     message
   };
 };
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   addProducts: productsActions.addProducts,
   getCategories: categoriesActions.getCategories
 };

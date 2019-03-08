@@ -6,3 +6,4 @@ coverage
 /__snapshots__/
 .DS_Store
 package-lock.json
+*.test.js
