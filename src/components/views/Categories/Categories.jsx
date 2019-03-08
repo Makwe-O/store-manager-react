@@ -13,7 +13,7 @@ import {
   Image,
   List
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav.jsx';
+import SidebarNav from '../SidebarNav/SidebarNav';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 

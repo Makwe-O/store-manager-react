@@ -15,7 +15,7 @@ import {
   Loader,
   Message
 } from 'semantic-ui-react';
-import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import Paginate from '../../common/Paginate';

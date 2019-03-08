@@ -9,7 +9,7 @@ import {
   Container,
   Grid
 } from 'semantic-ui-react';
-import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import * as cartActions from '../../../actions/cart/cartActions';
 import VerticalCard from '../VerticalCard/VerticalCard';

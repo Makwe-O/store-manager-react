@@ -118,9 +118,7 @@ export const SidebarNav = ({ navOption, logout, history }) => {
 const mapDispatchToProps = {
   logout: loginActions.logout
 };
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SidebarNav)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(SidebarNav));

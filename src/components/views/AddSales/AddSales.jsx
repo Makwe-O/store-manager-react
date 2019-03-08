@@ -10,7 +10,7 @@ import {
   Message,
   Form
 } from 'semantic-ui-react';
-import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
 import * as productsActions from '../../../actions/products/productsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';

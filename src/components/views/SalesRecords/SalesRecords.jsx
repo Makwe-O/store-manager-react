@@ -13,7 +13,7 @@ import {
   Dimmer,
   Loader
 } from 'semantic-ui-react';
-import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 

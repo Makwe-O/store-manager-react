@@ -13,7 +13,7 @@ import {
   Table,
   Form
 } from 'semantic-ui-react';
-import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as cartActions from '../../../actions/cart/cartActions';
 import HeaderContent from '../HeaderContent/HeaderContent';
 
