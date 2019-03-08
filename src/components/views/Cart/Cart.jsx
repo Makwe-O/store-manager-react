@@ -11,7 +11,8 @@ import {
   Loader,
   Image,
   Table,
-  Form
+  Form,
+  Message
 } from 'semantic-ui-react';
 import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as cartActions from '../../../actions/cart/cartActions';
@@ -20,7 +21,8 @@ import HeaderContent from '../HeaderContent/HeaderContent';
 export class Cart extends Component {
   state = {
     isLoading: false,
-    visible: false
+    visible: false,
+    quantity: ''
   };
 
   async componentDidMount() {
@@ -44,9 +46,25 @@ export class Cart extends Component {
     }
   }
 
+  onQuantityChange = e => {
+    const quantity = parseInt(e.target.value);
+    this.setState({ quantity });
+  };
+  handleSubmit = async e => {
+    e.preventDefault();
+    this.setState({
+      isLoading: true
+    });
+
+    const { clearCart, history } = this.props;
+    await clearCart(history);
+    this.setState({
+      isLoading: false
+    });
+  };
   render() {
-    const { products } = this.props;
-    const { visible, isLoading } = this.state;
+    const { products, message } = this.props;
+    const { visible, isLoading, quantity } = this.state;
 
     return (
       <>
@@ -73,7 +91,10 @@ export class Cart extends Component {
                 </Button>
                 <Segment basic>
                   <Header as="h2">Cart</Header>
-                  {products.length === 0 ? (
+                  {message.length !== 0 ? (
+                    <Message info content={message} />
+                  ) : null}
+                  {isLoading ? (
                     <>
                       <Segment style={{ height: '50vh' }}>
                         <Dimmer active inverted>
@@ -83,9 +104,11 @@ export class Cart extends Component {
                         <Image src="/images/wireframe/paragraph.png" />
                       </Segment>
                     </>
+                  ) : products.length === 0 ? (
+                    <h2>There are no products in the cart</h2>
                   ) : (
                     <>
-                      <Form>
+                      <Form onSubmit={this.handleSubmit} id="submit">
                         <Table celled padded>
                           <Table.Header>
                             <Table.Row>
@@ -100,7 +123,7 @@ export class Cart extends Component {
 
                           <Table.Body>
                             {products.map(product => (
-                              <Table.Row key={product.product_id}>
+                              <Table.Row key={product.name}>
                                 <Table.Cell>
                                   <Header as="h2">{product.name}</Header>
                                 </Table.Cell>
@@ -145,12 +168,13 @@ export class Cart extends Component {
 
 export const mapStateToProps = state => {
   const {
-    cartReducer: { products },
+    cartReducer: { products, message },
     loginReducer: { role }
   } = state;
 
   return {
     products,
+    message,
     role
   };
 };

@@ -1,5 +1,4 @@
 import configureMockStore from 'redux-mock-store';
-import moxios from 'moxios';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import Axios from 'axios';

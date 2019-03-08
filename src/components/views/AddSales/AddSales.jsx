@@ -27,7 +27,11 @@ export class AddSales extends Component {
   async componentDidMount() {
     this.checkRoleAttendant();
     const { getProducts } = this.props;
-    getProducts();
+    await getProducts();
+    const { products } = this.props;
+    await this.setState({
+      product_id: products[0].product_id
+    });
   }
 
   checkRoleAttendant() {
@@ -62,6 +66,7 @@ export class AddSales extends Component {
       isLoading: true
     });
     const { user_id, product_id, sales_amount } = this.state;
+
     const { addSalesRecord } = this.props;
     await addSalesRecord(user_id, product_id, sales_amount);
     this.setState({

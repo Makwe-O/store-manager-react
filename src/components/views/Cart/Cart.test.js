@@ -4,6 +4,7 @@ import { Cart, mapStateToProps, mapDispatchToProps } from './Cart';
 
 const props = {
   role: 'Attendant',
+  message: '',
   getCart: () => {},
   products: [
     {
@@ -23,6 +24,7 @@ const props = {
 
 const props2 = {
   role: '',
+  message: '',
   getCart: () => {},
   products: [
     {
@@ -42,6 +44,7 @@ const props2 = {
 
 const props3 = {
   role: 'Admin',
+  message: '',
   getCart: () => {},
   products: [
     {
@@ -61,6 +64,16 @@ const props3 = {
 
 const props4 = {
   role: 'Admin',
+  message: '',
+  getCart: () => {},
+  products: [],
+  history: {
+    push: () => {}
+  }
+};
+const props5 = {
+  role: 'Attendant',
+  message: 'Message',
   getCart: () => {},
   products: [],
   history: {
@@ -72,6 +85,7 @@ const wrapper = shallow(<Cart {...props} />);
 const wrapper2 = shallow(<Cart {...props2} />);
 const wrapper3 = shallow(<Cart {...props3} />);
 const wrapper4 = shallow(<Cart {...props4} />);
+const wrapper5 = shallow(<Cart {...props5} />);
 
 describe('Cart Component Test', () => {
   it('should render  component', () => {
@@ -85,6 +99,26 @@ describe('Cart Component Test', () => {
   });
   it('should render admin component when role is admin', () => {
     expect(wrapper4).toMatchSnapshot();
+  });
+  it('should render admin component when message is present', () => {
+    expect(wrapper4).toMatchSnapshot();
+  });
+  it('should simulate handling a quantity change', () => {
+    const onChange = jest.fn();
+    let preventDefault = jest.fn();
+    wrapper.setProps({ onProductChange: onChange });
+    wrapper.find('#quantity').simulate('change', {
+      target: {
+        value: '2'
+      }
+    });
+  });
+  it('should simulate handling submit', () => {
+    const onClick = jest.fn();
+    let preventDefault = jest.fn();
+    wrapper.setProps({ handleSubmit: onClick });
+    wrapper.find('#submit').simulate('submit', { preventDefault });
+    expect(preventDefault).toBeCalled();
   });
   it('mapStateToProps should return the right value', () => {
     const mockedState = {

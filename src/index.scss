@@ -6,9 +6,7 @@ h2,
 h3 {
   font-weight: 400 !important;
 }
-.full-height {
-  height: 100vh;
-}
+
 .segment-style {
   box-shadow: none !important;
   border: none !important;
@@ -38,4 +36,29 @@ h3 {
 
 .center {
   text-align: center;
+}
+.cart {
+  display: flex;
+  justify-content: space-between;
+}
+.number-container {
+  position: relative;
+}
+.cart-circle {
+  width: 30px;
+  height: 30px;
+  background: #2185d0;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  bottom: 20px;
+}
+.cart-number {
+  position: absolute;
+  padding: 10px;
+  border-radius: -4%;
+  color: #fff;
+  top: -19px;
+  right: -8px;
+  font-size: 20px;
 }

@@ -12,7 +12,7 @@ const LandingPage = () => {
         </div>
         <div>
           <Container textAlign="center">
-            <Header text-alighn="center" size="huge">
+            <Header text-alighn="center" size="huge" className="logo">
               Store Manger
             </Header>
             <div className="jumbotron">

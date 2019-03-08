@@ -4,6 +4,7 @@ export const ADD_CART_RESET = 'ADD_CART_RESET';
 export const GET_CART_SUCCESS = 'GET_CART_SUCCESS';
 export const GET_CART_FAILURE = 'GET_CART_FAILURE';
 export const RESET_CART = 'RESET_CART';
+export const RESET_CART_MESSAGE = 'RESET_CART_MESSAGE';
 
 export const addCartReset = () => ({
   type: ADD_CART_RESET,
@@ -32,27 +33,27 @@ export const addCart = ({ name, image, price }) => async dispatch => {
         }
       });
     }, 3000);
-  }
-
-  products.push({
-    name,
-    image,
-    price
-  });
-
-  localStorage.setItem('cart', JSON.stringify(products));
-  dispatch({
-    type: ADD_CART_SUCCESS,
-    payload: { products, message: 'Product Added' }
-  });
-  setTimeout(() => {
-    dispatch({
-      type: ADD_CART_RESET,
-      payload: {
-        message: ''
-      }
+  } else {
+    products.push({
+      name,
+      image,
+      price
     });
-  }, 3000);
+
+    localStorage.setItem('cart', JSON.stringify(products));
+    dispatch({
+      type: ADD_CART_SUCCESS,
+      payload: { products, message: 'Product Added' }
+    });
+    setTimeout(() => {
+      dispatch({
+        type: ADD_CART_RESET,
+        payload: {
+          message: ''
+        }
+      });
+    }, 3000);
+  }
 };
 
 export const getCart = () => async dispatch => {
@@ -69,9 +70,27 @@ export const getCart = () => async dispatch => {
   }
 };
 
-export const clearCart = () => async dispatch => {
+export const clearCart = history => async dispatch => {
   dispatch({
-    type: RESET_CART,
-    payload: []
+    type: RESET_CART_MESSAGE,
+    payload: {
+      message: 'Order Fufilled'
+    }
   });
+  setTimeout(() => {
+    dispatch({
+      type: ADD_CART_RESET,
+      payload: {
+        message: ''
+      }
+    });
+    dispatch({
+      type: RESET_CART,
+      payload: {
+        products: []
+      }
+    });
+    localStorage.removeItem('cart');
+    history.push('/attendant');
+  }, 3000);
 };

@@ -19,6 +19,11 @@ const cartReducer = (state = initialState, { type, payload }) => {
       return { ...state, ...payload };
     case 'GET_CART_SUCCESS':
       return { ...state, products: payload };
+    case 'RESET_CART':
+      return { ...state, ...payload };
+    case 'RESET_CART_MESSAGE':
+      return { ...state, ...payload };
+
     default:
       return state;
   }
