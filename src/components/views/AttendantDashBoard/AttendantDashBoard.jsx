@@ -9,8 +9,9 @@ import {
   Container,
   Grid
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
+import * as cartActions from '../../../actions/cart/cartActions';
 import VerticalCard from '../VerticalCard/VerticalCard';
 import VerticalCardLoader from '../VerticalCard/VerticalCardLoader';
 import Paginate from '../../common/Paginate';
@@ -66,7 +67,7 @@ export class AttendantDashBoard extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav />
+              <ConnectedSidebarNav />
             </Sidebar>
 
             <Container>
@@ -122,6 +123,7 @@ export class AttendantDashBoard extends Component {
                               price={product.price}
                               quantity={product.quantity}
                               category={product.category_name}
+                              addCart={this.props.addCart}
                             />
                           </Grid.Column>
                         ))}
@@ -156,7 +158,8 @@ export const mapStateToProps = state => {
   };
 };
 export const mapDispatchToProps = {
-  getProducts: productsActions.getProducts
+  getProducts: productsActions.getProducts,
+  addCart: cartActions.addCart
 };
 export default connect(
   mapStateToProps,

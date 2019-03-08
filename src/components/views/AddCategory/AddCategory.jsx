@@ -11,8 +11,9 @@ import {
   Form,
   Message
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
+import HeaderContent from '../HeaderContent/HeaderContent';
 
 export class AddCategory extends Component {
   state = {
@@ -77,11 +78,12 @@ export class AddCategory extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav navOption={role} />
+              <ConnectedSidebarNav navOption={role} />
             </Sidebar>
 
             <Container>
               <Sidebar.Pusher>
+                <HeaderContent />
                 <Button disabled={visible} onClick={this.handleShowClick}>
                   Show sidebar
                 </Button>

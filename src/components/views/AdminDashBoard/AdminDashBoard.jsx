@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -14,7 +15,7 @@ import {
   Loader,
   Message
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import Paginate from '../../common/Paginate';
@@ -79,15 +80,21 @@ export class AdminDashBoard extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav navOption={role} />
+              <ConnectedSidebarNav navOption={role} />
             </Sidebar>
 
             <Container>
               <Sidebar.Pusher>
                 <HeaderContent />
-                <Button disabled={visible} onClick={this.handleShowClick}>
-                  Sidebar
-                </Button>
+                <div className="navStyle">
+                  <Button disabled={visible} onClick={this.handleShowClick}>
+                    sidebar
+                  </Button>
+
+                  <Link to="/addproduct">
+                    <Button color="blue">Add Product </Button>
+                  </Link>
+                </div>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
                   {message.length !== 0 ? (

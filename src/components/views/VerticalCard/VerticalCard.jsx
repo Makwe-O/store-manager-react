@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Label, Image, Button, Icon } from 'semantic-ui-react';
 import './VerticalCard.scss';
 
-const VerticalCard = ({ name, image, price, quantity, category }) => {
+const VerticalCard = ({ name, image, price, quantity, category, addCart }) => {
   return (
     <>
       <Card>
@@ -26,7 +26,10 @@ const VerticalCard = ({ name, image, price, quantity, category }) => {
 
         <Button animated color="blue">
           <Button.Content visible>Add To Cart</Button.Content>
-          <Button.Content hidden>
+          <Button.Content
+            hidden
+            onClick={() => addCart({ name, image, price })}
+          >
             <Icon name="arrow right" />
           </Button.Content>
         </Button>

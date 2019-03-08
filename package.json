@@ -60,7 +60,10 @@
     "test": "jest -u --coverage",
     "test:coverage": "jest --coverage --colors && cat ./coverage/lcov.info",
     "test:watch": "jest --watch",
-    "dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --open",
+    "build": "webpack",
+    "postinstall": "npm run build",
+    "start": "node server/app.js"
   },
   "keywords": [],
   "author": "",
@@ -70,6 +73,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
+    "express": "^4.16.4",
     "jest": "^24.3.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",

@@ -92,7 +92,7 @@ export const SidebarNav = ({ navOption, logout, history }) => {
             </Menu.Item>
           </NavLink>
 
-          <NavLink activeClassName="is-active" to="/2" exact>
+          <NavLink activeClassName="is-active" to="/cart" exact>
             <Menu.Item as="div">
               <Icon name="shopping cart" />
               Cart
@@ -118,9 +118,7 @@ export const SidebarNav = ({ navOption, logout, history }) => {
 const mapDispatchToProps = {
   logout: loginActions.logout
 };
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SidebarNav)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(SidebarNav));
