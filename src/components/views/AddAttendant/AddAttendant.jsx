@@ -10,7 +10,7 @@ import {
   Form,
   Message
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
 import * as signUpActions from '../../../actions/signUp/signUpAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 
@@ -88,7 +88,7 @@ export class AddAttendant extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav navOption={role} />
+              <ConnectedSidebarNav navOption={role} />
             </Sidebar>
 
             <Container>

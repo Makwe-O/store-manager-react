@@ -10,6 +10,8 @@ import AddProduct from '../components/views/AddProduct/AddProduct';
 import AddAttendant from '../components/views/AddAttendant/AddAttendant';
 import AddCategory from '../components/views/AddCategory/AddCategory';
 import AddSales from '../components/views/AddSales/AddSales';
+import Cart from '../components/views/Cart/Cart';
+
 export default (
   <BrowserRouter>
     <>
@@ -20,6 +22,7 @@ export default (
         <Route path="/addcategory" component={AddCategory} exact />
         <Route path="/sales" component={SalesRecords} exact />
         <Route path="/addsales" component={AddSales} exact />
+        <Route path="/cart" component={Cart} exact />
         <Route path="/addproduct" component={AddProduct} exact />
         <Route path="/addattendant" component={AddAttendant} exact />
         <Route path="/attendant" component={AttendantDashBoard} exact />

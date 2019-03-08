@@ -13,7 +13,7 @@ import {
   Dimmer,
   Loader
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
 import * as salesRecordsActions from '../../../actions/salesRecords/salesRecordsAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 
@@ -63,7 +63,7 @@ export class SalesRecords extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav navOption={role} />
+              <ConnectedSidebarNav navOption={role} />
             </Sidebar>
 
             <Container>

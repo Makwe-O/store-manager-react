@@ -11,7 +11,7 @@ import {
   Form,
   Message
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import ConnectedSidebarNav from '../SidebarNav/SidebarNav.jsx';
 import * as productsActions from '../../../actions/products/productsAction';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
@@ -135,7 +135,7 @@ export class AddProduct extends Component {
               visible={visible}
               width="thin"
             >
-              <SidebarNav navOption={role} />
+              <ConnectedSidebarNav navOption={role} />
             </Sidebar>
 
             <Container>

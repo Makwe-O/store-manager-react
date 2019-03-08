@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -12,7 +13,7 @@ import {
   Image,
   List
 } from 'semantic-ui-react';
-import SidebarNav from '../SidebarNav/SidebarNav';
+import SidebarNav from '../SidebarNav/SidebarNav.jsx';
 import * as categoriesActions from '../../../actions/categories/categoriesAction';
 import HeaderContent from '../HeaderContent/HeaderContent';
 
@@ -68,9 +69,15 @@ export class Categories extends Component {
             <Container>
               <Sidebar.Pusher>
                 <HeaderContent />
-                <Button disabled={visible} onClick={this.handleShowClick}>
-                  sidebar
-                </Button>
+                <div className="navStyle">
+                  <Button disabled={visible} onClick={this.handleShowClick}>
+                    sidebar
+                  </Button>
+
+                  <Link to="/addCategory">
+                    <Button color="blue">Add Category </Button>
+                  </Link>
+                </div>
                 <Segment basic>
                   <Header as="h2">Categories</Header>
                   {categories.length === 0 ? (
