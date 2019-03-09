@@ -61,8 +61,7 @@
     "test:coverage": "jest --coverage --colors && cat ./coverage/lcov.info",
     "test:watch": "jest --watch",
     "dev": "webpack-dev-server --open",
-    "build": "webpack",
-    "postinstall": "npm run build",
+    "heroku-postbuild": "webpack -p",
     "start": "node server/app.js"
   },
   "keywords": [],

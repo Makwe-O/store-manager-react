@@ -7,7 +7,9 @@ import {
   Segment,
   Sidebar,
   Container,
-  Grid
+  Grid,
+  Message,
+  Icon
 } from 'semantic-ui-react';
 import ConnectedSidebarNav from '../SidebarNav/SidebarNav';
 import * as productsActions from '../../../actions/products/productsAction';
@@ -49,7 +51,7 @@ export class AttendantDashBoard extends Component {
   };
 
   render() {
-    const { products } = this.props;
+    const { products, addCart, message, cartProducts } = this.props;
     const { visible, pageSize, currentPage } = this.state;
     const paginatedProducts = paginate(products, currentPage, pageSize);
 
@@ -73,11 +75,24 @@ export class AttendantDashBoard extends Component {
             <Container>
               <Sidebar.Pusher>
                 <HeaderContent />
-                <Button disabled={visible} onClick={this.handleShowClick}>
-                  sidebar
-                </Button>
+                <div className="cart">
+                  <Button disabled={visible} onClick={this.handleShowClick}>
+                    sidebar
+                  </Button>
+                  <div className="number-container">
+                    <div className="cart-circle" />
+                    <div className="cart-number">
+                      <h4>{cartProducts.length}</h4>
+                    </div>
+
+                    <Icon disabled size="big" name="shopping cart" />
+                  </div>
+                </div>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>
+                  {message.length !== 0 ? (
+                    <Message info content={message} />
+                  ) : null}
                   {products.length === 0 ? (
                     <>
                       <Grid>
@@ -123,7 +138,7 @@ export class AttendantDashBoard extends Component {
                               price={product.price}
                               quantity={product.quantity}
                               category={product.category_name}
-                              addCart={this.props.addCart}
+                              addCart={addCart}
                             />
                           </Grid.Column>
                         ))}
@@ -149,12 +164,15 @@ export class AttendantDashBoard extends Component {
 export const mapStateToProps = state => {
   const {
     productsReducer: { products },
-    loginReducer: { role }
+    loginReducer: { role },
+    cartReducer: { products: cartProducts, message }
   } = state;
 
   return {
     products,
-    role
+    role,
+    message,
+    cartProducts
   };
 };
 export const mapDispatchToProps = {
