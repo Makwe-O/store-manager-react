@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Header,
@@ -75,18 +76,21 @@ export class AttendantDashBoard extends Component {
             <Container>
               <Sidebar.Pusher>
                 <HeaderContent />
+
                 <div className="cart">
                   <Button disabled={visible} onClick={this.handleShowClick}>
                     sidebar
                   </Button>
-                  <div className="number-container">
-                    <div className="cart-circle" />
-                    <div className="cart-number">
-                      <h4>{cartProducts.length}</h4>
-                    </div>
+                  <Link to="/cart">
+                    <div className="number-container">
+                      <div className="cart-circle" />
+                      <div className="cart-number">
+                        <h4>{cartProducts.length}</h4>
+                      </div>
 
-                    <Icon disabled size="big" name="shopping cart" />
-                  </div>
+                      <Icon disabled size="big" name="shopping cart" />
+                    </div>
+                  </Link>
                 </div>
                 <Segment basic>
                   <Header as="h2">DashBoard</Header>

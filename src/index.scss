@@ -51,7 +51,7 @@ h3 {
   border-radius: 50%;
   position: absolute;
   right: -10px;
-  bottom: 20px;
+  bottom: 13px;
 }
 .cart-number {
   position: absolute;
@@ -61,4 +61,12 @@ h3 {
   top: -19px;
   right: -8px;
   font-size: 20px;
+}
+.full-height {
+  height: 100vh !important;
+  min-height: 100% !important;
+}
+
+.ui.sidebar {
+  height: auto !important;
 }
